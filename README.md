@@ -25,12 +25,7 @@ npm run dev
 Для роботи потрібен токен TMDB:
 
 1. Отримайте токен (**API Read Access Token**) на сторінці https://www.themoviedb.org/settings/api.
-2. Створіть у корені проєкту файл `.env` і додайте до нього рядок:
-
-   ```
-   VITE_TMDB_TOKEN=ваш_токен
-   ```
-
+2. Створіть у корені проєкту файл `.env`. Скопіюйте .env.example у .env.
 3. Запустіть проєкт командою `npm run dev`. Якщо він уже був запущений, перезапустіть його, бо Vite читає `.env` лише під час старту.
 
 ## Сторінки та URL
@@ -58,7 +53,7 @@ src/
   models/IMovie.ts          інтерфейси IMovie, IMovieDetails, IGenre, IPaged
   redux/store.ts            configureStore + типізовані useAppDispatch / useAppSelector
   redux/slices/             MovieSlice, GenreSlice, MovieDetailsSlice (thunk + pending/fulfilled/rejected)
-  hooks/                    useDebounce, useTheme
+  hooks/                    useDebounce, useTheme, useMovieRating
   context/                  ThemeContext + ThemeProvider
   layouts/MainLayout.tsx    Header + контент
   routes/routes.tsx         createBrowserRouter
