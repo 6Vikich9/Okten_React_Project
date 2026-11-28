@@ -2,7 +2,7 @@
 
 Каталог фільмів на React + TypeScript з даними TMDB API.
 
-**Стек:** React 19, TypeScript, Vite, Tailwind CSS v4, React Router v7 (`createBrowserRouter`), Redux Toolkit, Context API, Vitest + Testing Library, oxlint.
+**Стек:** React 19, TypeScript, Vite, Tailwind CSS v4, React Router v8 (`createBrowserRouter`), Redux Toolkit, Context API, Vitest + Testing Library, oxlint.
 
 ## Запуск
 
