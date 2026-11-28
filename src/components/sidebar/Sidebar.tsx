@@ -6,6 +6,8 @@ interface IProps
     genres: IGenre[];
     activeGenre: string;
     onSelect: (genreId: string) => void;
+    error?: string | null;
+    onRetry?: () => void;
 }
 
 export function Sidebar({ genres, activeGenre, onSelect }: IProps)

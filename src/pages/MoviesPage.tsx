@@ -20,7 +20,7 @@ export function MoviesPage()
     const query = params.get("q") || "";
 
     const dispatch = useAppDispatch();
-    const genres = useAppSelector((state) => state.genreStoreSlice.genres);
+    const { genres, error: genresError } = useAppSelector((state) => state.genreStoreSlice);
     const { movies, totalPages, totalResults, isLoading, error } = useAppSelector((state) => state.movieStoreSlice);
     const genresById = useMemo(
         () => Object.fromEntries(genres.map((g) => [g.id, g])) as Record<number, IGenre>,
@@ -50,7 +50,13 @@ export function MoviesPage()
 
     return (
         <main className="mx-auto flex max-w-[1400px] flex-col gap-6 p-6 md:flex-row">
-            <Sidebar genres={genres} activeGenre={genre} onSelect={(id) => update({ genre: id, page: "", q: "" })} />
+            <Sidebar
+                genres={genres}
+                activeGenre={genre}
+                error={genresError}
+                onRetry={() => dispatch(genreActions.loadGenres())}
+                onSelect={(id) => update({ genre: id, page: "", q: "" })}
+            />
 
             <section className="min-w-0 flex-1">
                 <div className="mb-2 flex flex-wrap items-center justify-between gap-3">
