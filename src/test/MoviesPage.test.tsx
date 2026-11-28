@@ -48,7 +48,7 @@ test("показує помилку API з кнопкою повтору", async
         })));
     renderPage();
     await waitFor(() => expect(screen.getByText(/TMDB 401: Invalid API key/)).toBeTruthy());
-    expect(screen.getByText("Спробувати ще")).toBeTruthy();
+    expect(screen.getAllByText("Спробувати ще").length).toBeGreaterThan(0);
 });
 
 test("некоректні параметри в URL виправляються до допустимих значень", async () =>
@@ -92,4 +92,15 @@ test("клік по зірці на картці додає оцінку до р
     fireEvent.click(screen.getByLabelText("Оцінити на 5 з 5"));
     expect(screen.getByText("(100)")).toBeTruthy();
     expect(screen.queryByText("· ваша: 5★")).toBeNull();
+});
+
+test("помилка завантаження жанрів показується в бічній панелі з кнопкою повтору", async () =>
+{
+    vi.stubGlobal("fetch", vi.fn(async (url: URL) => (
+        url.pathname.includes("genre")
+            ? { ok: false, status: 500, statusText: "Server Error", json: async () => ({ status_message: "boom" }) }
+            : { ok: true, json: async () => ({ page: 1, total_pages: 1, total_results: 0, results: [] }) }
+    )));
+    renderPage();
+    expect(await screen.findByText(/Не вдалося завантажити жанри/)).toBeTruthy();
 });

@@ -10,11 +10,17 @@ interface IProps
     onRetry?: () => void;
 }
 
-export function Sidebar({ genres, activeGenre, onSelect }: IProps)
+export function Sidebar({ genres, activeGenre, onSelect, error, onRetry }: IProps)
 {
     return (
         <aside className="w-full shrink-0 md:w-56">
             <h2 className="mb-3 text-sm font-semibold text-stone-500 dark:text-neutral-400 uppercase">Жанри</h2>
+            {error && (
+                <p className="mb-3 text-sm text-red-500">
+                    Не вдалося завантажити жанри.{" "}
+                    <button type="button" onClick={onRetry} className="cursor-pointer underline">Спробувати ще</button>
+                </p>
+            )}
             <div className="flex flex-wrap gap-2">
                 <GenreBadge name="Усі" active={!activeGenre} onClick={() => onSelect("")} />
                 {genres.map((g) => (

@@ -18,7 +18,7 @@ export function MovieInfo({ id, title, year, overview, genres = [], onGenreClick
     return (
         <div>
             <h3 className="mb-2 font-bold">
-                {id ? <Link to={`/movie/${id}`} className="hover:text-stone-500">{title}</Link> : title}
+                {id ? <Link to={`/movie/${id}`} onClick={(e) => e.stopPropagation()} className="hover:text-stone-500">{title}</Link> : title}
                 {year && <span className="font-normal text-stone-500 dark:text-neutral-400"> ({year})</span>}
             </h3>
             <div className="mb-2 flex flex-wrap gap-1.5">
